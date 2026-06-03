@@ -68,6 +68,7 @@ export default function TabRail({ tabs }: { tabs: TabItem[] }) {
           gap: 4,
           overflowX: "auto",
           scrollbarWidth: "none",
+          justifyContent: "center",
         }}
       >
         {tabs.map(({ id, label }) => {

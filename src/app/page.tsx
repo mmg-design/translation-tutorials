@@ -44,48 +44,32 @@ export default async function Home() {
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          padding: "80px 32px 72px",
-          position: "relative",
+          padding: "72px 32px 80px",
           background: "#fff",
         }}
       >
         <div
           style={{
-            maxWidth: 880,
+            maxWidth: 1200,
             width: "100%",
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
             textAlign: "center",
-            gap: 28,
+            gap: 24,
           }}
         >
-          <span
-            style={{
-              fontSize: 11,
-              fontWeight: 700,
-              letterSpacing: "0.14em",
-              textTransform: "uppercase",
-              color: "var(--green)",
-              background: "var(--green-light)",
-              padding: "5px 16px",
-              borderRadius: 999,
-            }}
-          >
-            Welcome
-          </span>
-
           <h1
             style={{
-              fontSize: "clamp(38px, 5.5vw, 68px)",
+              fontSize: "clamp(36px, 5vw, 62px)",
               fontWeight: 600,
-              lineHeight: 1.08,
-              letterSpacing: "-0.025em",
+              lineHeight: 1.05,
+              letterSpacing: "-0.04em",
+              wordSpacing: "-0.05em",
               color: "var(--green-dark)",
             }}
           >
-            Welcome to the{" "}
-            <span style={{ color: "var(--green)" }}>Translation Team</span>
+            TTT Website Tutorials
           </h1>
 
           <p
@@ -93,12 +77,11 @@ export default async function Home() {
               fontSize: 17,
               fontWeight: 300,
               color: "var(--ink-mid)",
-              maxWidth: 520,
-              lineHeight: 1.65,
+              maxWidth: 500,
+              lineHeight: 1.6,
             }}
           >
-            Everything you need to hit the ground running — watch the intro,
-            then follow the tutorials below at your own pace.
+            Watch the intro below, then follow the tutorials at your own pace.
           </p>
 
           <div style={{ width: "100%", marginTop: 8 }}>
@@ -127,30 +110,28 @@ export default async function Home() {
               />
             </div>
           </div>
-        </div>
 
-        <div
-          style={{
-            position: "absolute",
-            bottom: 32,
-            left: "50%",
-            transform: "translateX(-50%)",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            gap: 6,
-            color: "var(--ink-muted)",
-            fontSize: 11,
-            fontWeight: 500,
-            letterSpacing: "0.08em",
-            textTransform: "uppercase",
-            animation: "bounceDown 2.4s ease-in-out infinite",
-          }}
-        >
-          <span>Scroll to tutorials</span>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-            <path d="M12 5v14M5 12l7 7 7-7" />
-          </svg>
+          {/* Scroll hint — below the video, not overlapping */}
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              gap: 6,
+              marginTop: 8,
+              color: "var(--ink-muted)",
+              fontSize: 11,
+              fontWeight: 500,
+              letterSpacing: "0.08em",
+              textTransform: "uppercase",
+              animation: "bounceDown 2.4s ease-in-out infinite",
+            }}
+          >
+            <span>Scroll to tutorials</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+              <path d="M12 5v14M5 12l7 7 7-7" />
+            </svg>
+          </div>
         </div>
       </section>
 
