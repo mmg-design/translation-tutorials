@@ -1,9 +1,29 @@
 import SiteHeader from "@/components/SiteHeader";
 import TabRail from "@/components/TabRail";
 import TutorialCard from "@/components/TutorialCard";
-import { tutorials } from "@/lib/tutorials";
+import { getTutorials } from "@/lib/sanity";
+import { tutorials as fallback } from "@/lib/tutorials";
+import type { Tutorial } from "@/lib/tutorials";
 
-export default function Home() {
+export const revalidate = 60; // ISR: refresh every 60 seconds
+
+export default async function Home() {
+  // Fetch from Sanity; fall back to static data if CMS is empty
+  const sanityTutorials = await getTutorials().catch(() => []);
+  const data: Tutorial[] =
+    sanityTutorials.length > 0
+      ? sanityTutorials.map((t) => ({
+          id: `tutorial-${t.order}`,
+          index: t.index,
+          label: t.label,
+          title: t.title,
+          description: t.description,
+          steps: t.steps,
+          videoEmbed: t.videoEmbedUrl
+            ? `<iframe style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;" src="${t.videoEmbedUrl}" allow="autoplay; fullscreen" allowfullscreen></iframe>`
+            : null,
+        }))
+      : fallback;
   return (
     <>
       <SiteHeader />
@@ -139,7 +159,7 @@ export default function Home() {
           gap: 48,
         }}
       >
-        {tutorials.map((t, i) => (
+        {data.map((t, i) => (
           <TutorialCard key={t.id} tutorial={t} flip={i % 2 === 1} />
         ))}
       </div>
