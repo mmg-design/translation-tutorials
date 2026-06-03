@@ -5,6 +5,12 @@ import { getTutorials } from "@/lib/sanity";
 import { tutorials as fallback } from "@/lib/tutorials";
 import type { Tutorial } from "@/lib/tutorials";
 
+// Ensure Tella URLs use the /embed path — handles both share and embed URLs
+function tellaEmbedHtml(url: string): string {
+  const embedUrl = url.includes("/embed") ? url : url.replace(/\/$/, "") + "/embed?b=0&title=1&a=1&loop=0&t=0&muted=0&wt=1&o=1";
+  return `<iframe style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;" src="${embedUrl}" allow="autoplay; fullscreen" allowfullscreen></iframe>`;
+}
+
 export const revalidate = 60; // ISR: refresh every 60 seconds
 
 export default async function Home() {
@@ -18,15 +24,16 @@ export default async function Home() {
           label: t.label,
           title: t.title,
           description: t.description,
-          videoEmbed: t.videoEmbedUrl
-            ? `<iframe style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;" src="${t.videoEmbedUrl}" allow="autoplay; fullscreen" allowfullscreen></iframe>`
-            : null,
+          videoEmbed: t.videoEmbedUrl ? tellaEmbedHtml(t.videoEmbedUrl) : null,
         }))
       : fallback;
   return (
     <>
       <SiteHeader />
-      <TabRail />
+      <TabRail tabs={[
+        { id: "hero", label: "Intro" },
+        ...data.map((t) => ({ id: t.id, label: t.label })),
+      ]} />
 
       {/* ── Hero ── */}
       <section

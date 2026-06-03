@@ -1,24 +1,27 @@
 "use client";
 import { useEffect, useState } from "react";
-import { tutorials } from "@/lib/tutorials";
 
-const TABS = [
-  { id: "hero", label: "Intro" },
-  ...tutorials.map((t) => ({ id: t.id, label: t.label })),
-];
+export interface TabItem {
+  id: string;
+  label: string;
+}
 
-export default function TabRail() {
-  const [active, setActive] = useState("hero");
+export default function TabRail({ tabs }: { tabs: TabItem[] }) {
+  const [active, setActive] = useState(tabs[0]?.id ?? "hero");
 
   useEffect(() => {
-    const headerH =
-      (document.querySelector("header")?.offsetHeight ?? 64) +
-      (document.querySelector(".tab-rail")?.clientHeight ?? 52);
+    function offset() {
+      return (
+        (document.querySelector("header")?.offsetHeight ?? 64) +
+        (document.querySelector(".tab-rail")?.clientHeight ?? 52) +
+        48
+      );
+    }
 
     function onScroll() {
-      const scrollY = window.scrollY + headerH + 48;
-      let current = "hero";
-      TABS.forEach(({ id }) => {
+      const scrollY = window.scrollY + offset();
+      let current = tabs[0]?.id ?? "hero";
+      tabs.forEach(({ id }) => {
         const el = document.getElementById(id);
         if (el && el.offsetTop <= scrollY) current = id;
       });
@@ -28,16 +31,16 @@ export default function TabRail() {
     window.addEventListener("scroll", onScroll, { passive: true });
     onScroll();
     return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  }, [tabs]);
 
   function scrollTo(id: string) {
     const el = document.getElementById(id);
     if (!el) return;
-    const headerH =
+    const off =
       (document.querySelector("header")?.offsetHeight ?? 64) +
-      (document.querySelector(".tab-rail")?.clientHeight ?? 52);
-    const top = el.getBoundingClientRect().top + window.scrollY - headerH - 16;
-    window.scrollTo({ top, behavior: "smooth" });
+      (document.querySelector(".tab-rail")?.clientHeight ?? 52) +
+      16;
+    window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - off, behavior: "smooth" });
   }
 
   return (
@@ -67,7 +70,7 @@ export default function TabRail() {
           scrollbarWidth: "none",
         }}
       >
-        {TABS.map(({ id, label }) => {
+        {tabs.map(({ id, label }) => {
           const isActive = active === id;
           return (
             <button
@@ -87,20 +90,18 @@ export default function TabRail() {
                 color: isActive ? "#fff" : "var(--ink-muted)",
                 transition: "background 0.18s, color 0.18s",
                 letterSpacing: "0.01em",
+                whiteSpace: "nowrap",
               }}
               onMouseEnter={(e) => {
                 if (!isActive) {
-                  (e.target as HTMLButtonElement).style.background =
-                    "var(--green-light)";
+                  (e.target as HTMLButtonElement).style.background = "var(--green-light)";
                   (e.target as HTMLButtonElement).style.color = "var(--green)";
                 }
               }}
               onMouseLeave={(e) => {
                 if (!isActive) {
-                  (e.target as HTMLButtonElement).style.background =
-                    "transparent";
-                  (e.target as HTMLButtonElement).style.color =
-                    "var(--ink-muted)";
+                  (e.target as HTMLButtonElement).style.background = "transparent";
+                  (e.target as HTMLButtonElement).style.color = "var(--ink-muted)";
                 }
               }}
             >

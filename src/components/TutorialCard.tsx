@@ -89,8 +89,8 @@ export default function TutorialCard({ tutorial }: { tutorial: Tutorial }) {
           </button>
 
           <div style={{
-            maxHeight: open ? 600 : 0,
-            overflow: "hidden",
+            maxHeight: open ? 400 : 0,
+            overflowY: open ? "auto" : "hidden",
             transition: "max-height 0.3s ease",
           }}>
             <p style={{
