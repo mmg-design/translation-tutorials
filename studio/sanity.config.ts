@@ -8,6 +8,7 @@ export default defineConfig({
   title: "Translation Tutorials",
   projectId: "9eiem856",
   dataset: "production",
+  basePath: "/studio",
   plugins: [structureTool(), visionTool()],
   schema: { types: schemaTypes },
 });
