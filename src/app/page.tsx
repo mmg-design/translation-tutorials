@@ -81,7 +81,7 @@ export default async function Home() {
               lineHeight: 1.6,
             }}
           >
-            A growing database of videos and tutorials for small website adjustments that can be referenced over time.
+            A growing database of tutorials for your new website that can be referenced over time.
           </p>
 
           <div style={{ width: "100%", marginTop: 8 }}>
