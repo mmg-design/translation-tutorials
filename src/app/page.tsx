@@ -81,7 +81,7 @@ export default async function Home() {
               lineHeight: 1.6,
             }}
           >
-            Watch the intro below, then follow the tutorials at your own pace.
+            A growing database of videos and tutorials for small website adjustments that can be referenced over time.
           </p>
 
           <div style={{ width: "100%", marginTop: 8 }}>
