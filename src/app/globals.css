@@ -1,26 +1,81 @@
 @import "tailwindcss";
 
+/* ── Custom fonts ── */
+@font-face {
+  font-family: 'ClarityCity';
+  src: url('/fonts/ClarityCity-Light.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'ClarityCity';
+  src: url('/fonts/ClarityCity-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'ClarityCity';
+  src: url('/fonts/ClarityCity-Medium.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'ClarityCity';
+  src: url('/fonts/ClarityCity-SemiBold.otf') format('opentype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'ClarityCity';
+  src: url('/fonts/ClarityCity-Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ── Design tokens ── */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --font:         'ClarityCity', system-ui, sans-serif;
+  --green:        #026d43;
+  --green-dark:   #013c25;
+  --green-deep:   #015534;
+  --green-mid:    #2b6743;
+  --green-light:  #e8f5ef;
+  --green-soft:   #f4faf7;
+  --white:        #ffffff;
+  --ink:          #0d1f17;
+  --ink-mid:      #3a5045;
+  --ink-muted:    #7a9488;
+  --rule:         #ddeae4;
+  --header-h:     64px;
+  --tab-h:        52px;
+  --shadow:       0 4px 24px rgba(1,55,36,0.07);
+  --shadow-video: 0 8px 48px rgba(1,55,36,0.14), 0 2px 10px rgba(1,55,36,0.06);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font);
+  background: var(--white);
+  color: var(--ink);
+  font-size: 16px;
+  line-height: 1.65;
+}
+
+/* ── Scroll reveal ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
