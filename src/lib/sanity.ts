@@ -7,18 +7,12 @@ export const client = createClient({
   useCdn: true,
 });
 
-export interface SanityStep {
-  title: string;
-  body: string;
-}
-
 export interface SanityTutorial {
   _id: string;
   index: string;
   label: string;
   title: string;
   description: string;
-  steps: SanityStep[];
   videoEmbedUrl: string | null;
   order: number;
 }
@@ -26,7 +20,7 @@ export interface SanityTutorial {
 export async function getTutorials(): Promise<SanityTutorial[]> {
   return client.fetch(
     `*[_type == "tutorial"] | order(order asc) {
-      _id, index, label, title, description, steps, videoEmbedUrl, order
+      _id, label, title, description, videoEmbedUrl, order
     }`
   );
 }

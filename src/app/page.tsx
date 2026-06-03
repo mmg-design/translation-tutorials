@@ -12,13 +12,12 @@ export default async function Home() {
   const sanityTutorials = await getTutorials().catch(() => []);
   const data: Tutorial[] =
     sanityTutorials.length > 0
-      ? sanityTutorials.map((t) => ({
+      ? sanityTutorials.map((t, i) => ({
           id: `tutorial-${t.order}`,
-          index: t.index,
+          index: String(i + 1).padStart(2, "0"),
           label: t.label,
           title: t.title,
           description: t.description,
-          steps: t.steps,
           videoEmbed: t.videoEmbedUrl
             ? `<iframe style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;" src="${t.videoEmbedUrl}" allow="autoplay; fullscreen" allowfullscreen></iframe>`
             : null,
@@ -159,8 +158,8 @@ export default async function Home() {
           gap: 48,
         }}
       >
-        {data.map((t, i) => (
-          <TutorialCard key={t.id} tutorial={t} flip={i % 2 === 1} />
+        {data.map((t) => (
+          <TutorialCard key={t.id} tutorial={t} />
         ))}
       </div>
 
