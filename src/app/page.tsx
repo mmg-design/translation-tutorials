@@ -111,14 +111,16 @@ export default async function Home() {
             </div>
           </div>
 
-          {/* Scroll hint — below the video, not overlapping */}
+          {/* Scroll hint — below the video, centered */}
           <div
             style={{
+              width: "100%",
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
+              justifyContent: "center",
               gap: 6,
-              marginTop: 8,
+              marginTop: 16,
               color: "var(--ink-muted)",
               fontSize: 11,
               fontWeight: 500,
